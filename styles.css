@@ -40,7 +40,7 @@ footer{justify-content:flex-end}
   body.quiz-awaiting-answer .site-header{flex:0 0 auto}
   body.quiz-awaiting-answer main{flex:0 0 auto;min-height:0;height:auto}
   body.quiz-awaiting-answer #quiz{padding-bottom:16px}
-  body.quiz-awaiting-answer footer{flex:0 0 auto;margin-top:auto}
+  body.quiz-awaiting-answer footer{position:fixed;left:0;right:0;bottom:0;z-index:5;margin:0;background:var(--paper)}
   .quiz-intro h1{font-size:27px;line-height:1.25;letter-spacing:-1px;white-space:nowrap}
 }
 .update-notice{position:fixed;left:50%;bottom:max(18px,env(safe-area-inset-bottom));z-index:50;width:min(430px,calc(100% - 28px));transform:translateX(-50%);display:flex;align-items:center;gap:12px;padding:13px 14px 13px 17px;border-radius:13px;background:var(--ink);color:white;box-shadow:0 14px 40px rgba(24,39,35,.28)}
