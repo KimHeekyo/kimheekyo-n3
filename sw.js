@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'kimheekyo-n3-v2';
+const CACHE_VERSION = 'kimheekyo-n3-v3';
 const APP_SHELL = [
   './', './index.html', './styles.css', './app.js', './data/words.js',
   './manifest.webmanifest', './icons/n3-icon.svg', './icons/icon-192.png',
@@ -6,7 +6,7 @@ const APP_SHELL = [
 ];
 
 self.addEventListener('install', event => {
-  event.waitUntil(caches.open(CACHE_VERSION).then(cache => cache.addAll(APP_SHELL)));
+  event.waitUntil(caches.open(CACHE_VERSION).then(cache => cache.addAll(APP_SHELL)).then(() => self.skipWaiting()));
 });
 
 self.addEventListener('activate', event => {

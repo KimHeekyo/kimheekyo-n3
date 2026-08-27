@@ -28,7 +28,13 @@ footer{justify-content:flex-end}
   footer{padding:15px 18px}
 }
 @media(max-width:360px){#home{padding-left:12px;padding-right:12px}#home .stat-card>span{font-size:9px}#home .quick-card{min-height:56px}}
-@media(max-width:520px){main{min-height:0}.quiz-intro h1{font-size:27px;line-height:1.25;letter-spacing:-1px;white-space:nowrap}}
+@media(max-width:520px){
+  html.home-active,body.home-active{overflow:hidden}
+  body.home-active main{min-height:0;height:auto}
+  body.home-active #home{padding-bottom:6px}
+  body.home-active footer{padding-top:8px}
+  .quiz-intro h1{font-size:27px;line-height:1.25;letter-spacing:-1px;white-space:nowrap}
+}
 .update-notice{position:fixed;left:50%;bottom:max(18px,env(safe-area-inset-bottom));z-index:50;width:min(430px,calc(100% - 28px));transform:translateX(-50%);display:flex;align-items:center;gap:12px;padding:13px 14px 13px 17px;border-radius:13px;background:var(--ink);color:white;box-shadow:0 14px 40px rgba(24,39,35,.28)}
 .update-notice span{min-width:0;flex:1}.update-notice b,.update-notice small{display:block}.update-notice b{font-size:13px}.update-notice small{margin-top:3px;color:#cad7d2;font-size:10px}.update-notice button{border:0;border-radius:8px;background:var(--coral);color:white;padding:10px 12px;font-weight:800;white-space:nowrap}.update-notice .update-dismiss{padding:5px;background:transparent;color:#cad7d2;font-size:20px}
 @supports(padding:max(0px)){
