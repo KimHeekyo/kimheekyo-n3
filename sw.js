@@ -1,6 +1,6 @@
-const CACHE_VERSION = 'kimheekyo-n3-v11';
+const CACHE_VERSION = 'kimheekyo-n3-v12';
 const APP_SHELL = [
-  './', './index.html', './styles.css?v=11', './app.js', './data/words.js',
+  './', './index.html', './styles.css?v=12', './app.js?v=12', './data/words.js',
   './manifest.webmanifest', './icons/n3-icon.svg', './icons/icon-192.png',
   './icons/icon-512.png', './icons/apple-touch-icon.png'
 ];
