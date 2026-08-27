@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#f5efe4">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="김희교 N3">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="description" content="오프라인으로 학습하는 김희교 JLPT N3 공부 단어집">
+  <title>김희교 N3 공부 단어집</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/n3-icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#home" data-go="home" aria-label="김희교 N3 공부 단어집 홈">
+      <span class="brand-mark">N3</span>
+      <span><b>김희교 N3 공부 단어집</b><small>JLPT N3 VOCABULARY</small></span>
+    </a>
+    <nav aria-label="주 메뉴">
+      <button class="nav-button" data-view="words">단어장</button>
+      <button class="nav-button" data-view="review">오답노트 <span id="reviewCount" class="count">0</span></button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="view active">
+      <section class="section-block quick-section">
+        <div class="section-heading"><div><h2>학습하기</h2></div></div>
+        <div class="quick-grid">
+          <button class="quick-card green" data-go="quiz" data-quiz-mode="daily"><span class="quick-icon">今</span><span><b>오늘의 퀴즈</b><small>10문제 풀기</small></span><i>→</i></button>
+          <button class="quick-card coral" data-go="words"><span class="quick-icon">あ</span><span><b>전체 단어 보기</b><small id="wordTotal">N3 핵심 단어</small></span><i>→</i></button>
+          <button class="quick-card green" data-go="quiz" data-quiz-mode="random"><span class="quick-icon">問</span><span><b>랜덤 퀴즈</b><small>그만할 때까지 계속 풀기</small></span><i>→</i></button>
+          <button class="quick-card yellow" data-go="review"><span class="quick-icon">復</span><span><b>오답 복습</b><small>틀린 단어 다시 보기</small></span><i>→</i></button>
+        </div>
+      </section>
+
+      <section class="section-block progress-section">
+        <div class="section-heading"><div><h2>오늘의 학습</h2></div><span id="todayDate"></span></div>
+        <div class="stats-grid">
+          <article class="stat-card"><span>학습한 문제</span><strong id="answeredStat">0</strong><small>문제</small></article>
+          <article class="stat-card accent"><span>오늘의 정답률</span><strong id="accuracyStat">—</strong><small id="accuracyCaption">첫 문제를 풀어보세요</small></article>
+          <article class="stat-card"><span>외운 단어</span><strong id="masteredStat">0</strong><small>단어</small></article>
+        </div>
+      </section>
+    </section>
+
+    <section id="words" class="view page-view">
+      <div class="page-title"><p class="eyebrow">WORD COLLECTION</p><h1>나의 N3 단어장</h1><p>단어를 눌러 뜻과 예문을 확인하세요.</p></div>
+      <div class="toolbar">
+        <label class="search"><span>⌕</span><input id="wordSearch" type="search" placeholder="일본어, 읽기, 뜻으로 검색"></label>
+        <select id="categoryFilter" aria-label="품사 필터"><option value="all">모든 품사</option><option value="명사">명사</option><option value="동사">동사</option><option value="형용사">형용사</option><option value="부사">부사</option><option value="접속사">접속사</option><option value="감탄사">감탄사</option><option value="조사">조사</option><option value="표현">표현</option></select>
+      </div>
+      <div id="wordGrid" class="word-grid"></div>
+      <p id="emptyWords" class="empty hidden">검색 결과가 없습니다.</p>
+    </section>
+
+    <section id="quiz" class="view page-view">
+      <div class="quiz-wrap">
+        <div id="quizIntro" class="quiz-intro">
+          <p id="quizIntroLabel" class="eyebrow">10 QUESTIONS</p><h1 id="quizIntroTitle">오늘의 퀴즈</h1><p id="quizIntroCopy">뜻을 맞히면 예문이 공개됩니다.<br>틀린 단어는 오답노트에 자동으로 담겨요.</p>
+          <fieldset><legend>문제 방향</legend><label><input type="radio" name="direction" value="jp-ko" checked> 일본어 → 한국어</label><label><input type="radio" name="direction" value="ko-jp"> 한국어 → 일본어</label></fieldset>
+          <button id="startQuiz" class="primary">퀴즈 시작 <span>→</span></button>
+        </div>
+        <div id="quizGame" class="hidden">
+          <div class="quiz-top"><button id="quitQuiz" class="text-button">← 나가기</button><span id="quizProgress">1 / 10</span><span id="quizScore">정답 0</span></div>
+          <div id="progressTrack" class="progress-track"><span id="progressBar"></span></div>
+          <article class="question-card">
+            <p id="questionLabel" class="eyebrow">다음 단어의 뜻은?</p>
+            <h2 id="questionText"></h2><p id="questionReading" class="reading"></p>
+            <div id="options" class="options"></div>
+            <div id="answerPanel" class="answer-panel hidden"><p id="answerResult"></p><p id="answerReading" class="answer-reading"></p><div class="example"><span>例文</span><p id="exampleJp"></p><small id="exampleKo"></small></div><button id="nextQuestion" class="primary">다음 문제 <span>→</span></button></div>
+          </article>
+        </div>
+        <div id="quizResult" class="quiz-result hidden"><span class="result-mark">完</span><p class="eyebrow">QUIZ COMPLETE</p><h1>수고했어요!</h1><p id="resultCopy"></p><div class="result-actions"><button id="retryQuiz" class="primary">다시 풀기</button><button class="secondary" data-go="review">오답 복습</button></div></div>
+      </div>
+    </section>
+
+    <section id="review" class="view page-view">
+      <div class="page-title"><p class="eyebrow">REVIEW NOTE</p><h1>오답노트</h1><p>헷갈렸던 단어를 차근차근 다시 확인하세요.</p></div>
+      <div id="reviewGrid" class="word-grid"></div>
+      <div id="emptyReview" class="empty-state"><span>✓</span><h2>아직 틀린 단어가 없어요</h2><p>퀴즈를 풀면 오답이 여기에 모입니다.</p><button class="primary" data-go="quiz">퀴즈 풀기</button></div>
+    </section>
+  </main>
+  <aside id="updateNotice" class="update-notice hidden" role="status" aria-live="polite">
+    <span><b>새 버전이 있어요</b><small>학습 기록은 그대로 유지됩니다.</small></span>
+    <button id="applyUpdate" type="button">업데이트</button>
+    <button id="dismissUpdate" class="update-dismiss" type="button" aria-label="나중에 업데이트">×</button>
+  </aside>
+  <footer><p>Made by 김희교</p></footer>
+  <script src="data/words.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
