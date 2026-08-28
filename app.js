@@ -38,7 +38,8 @@ const LEGACY_WORDS_UNUSED = [
 ];
 
 const VOCABULARY_CORRECTIONS={
-  'うがい':{meaning:'가글, 입 헹구기',translation:'가글했어?'}
+  'うがい':{meaning:'가글, 입 헹구기',translation:'가글했어?'},
+  '夜':{kana:'よる',example:'夜は静かです。',translation:'밤은 조용합니다.'}
 };
 WORDS.forEach(word=>{const correction=VOCABULARY_CORRECTIONS[word.word];if(correction)Object.assign(word,correction)});
 
