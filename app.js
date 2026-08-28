@@ -37,6 +37,11 @@ const LEGACY_WORDS_UNUSED = [
   {word:'認める',kana:'みとめる',meaning:'인정하다, 허가하다',type:'동사',example:'彼は自分の失敗を認めました。',translation:'그는 자신의 실패를 인정했습니다.'}
 ];
 
+const VOCABULARY_CORRECTIONS={
+  'うがい':{meaning:'가글, 입 헹구기',translation:'가글했어?'}
+};
+WORDS.forEach(word=>{const correction=VOCABULARY_CORRECTIONS[word.word];if(correction)Object.assign(word,correction)});
+
 const STORAGE_KEY='kimheekyo-n3-progress-v2';
 let state=loadState(); let quiz=[]; let quizIndex=0; let quizScore=0; let direction='jp-ko'; let quizMode='daily'; let quizRoundOffset=0;
 function loadState(){try{return {...{answered:0,correct:0,mastered:[],wrong:[],date:todayKey()},...JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}')}}catch{return {answered:0,correct:0,mastered:[],wrong:[],date:todayKey()}}}
