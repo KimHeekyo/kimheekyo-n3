@@ -63,6 +63,27 @@ const POS_CORRECTIONS={
   '頂く':{meaning:'받다, 먹다, 마시다',type:'동사'},'集まり':{meaning:'모임, 집합',type:'명사'},'ありがとう':{meaning:'고마움, 감사',type:'표현'},'おしゃべり':{meaning:'수다, 수다쟁이',type:'명사'},'穏やか':{meaning:'온화하다, 평온하다',type:'형용사'},'がっかり':{meaning:'실망하다, 낙담하다',type:'부사·표현'},'食う':{meaning:'먹다',type:'동사'},'濃い':{meaning:'짙다, 진하다',type:'형용사'},'鋭い':{meaning:'날카롭다, 예리하다',type:'형용사'},'違いない':{meaning:'틀림없다',type:'표현'},'どれ':{meaning:'어느 것',type:'대명사'},'訳':{meaning:'의미, 이유, 사정',type:'명사'},'ハンサム':{meaning:'잘생기다, 멋지다',type:'형용사'},'そっくり':{meaning:'똑같이, 꼭 닮게',type:'부사'},'まさに':{meaning:'바로, 틀림없이',type:'부사'}
 };
 WORDS.forEach(word=>{if(POS_CORRECTIONS[word.word])Object.assign(word,POS_CORRECTIONS[word.word])});
+const KATAKANA_CORRECTIONS={
+  'アウト':{meaning:'아웃, 탈락',example:'打者はアウトになった。',translation:'타자는 아웃되었다.'},
+  'カー':{meaning:'자동차',example:'レンタカーを借りた。',translation:'렌터카를 빌렸다.'},
+  'グランド':{meaning:'운동장, 경기장',example:'グランドでサッカーをする。',translation:'운동장에서 축구를 한다.'},
+  'クリスマス':{meaning:'크리스마스',example:'明日はクリスマスだ。',translation:'내일은 크리스마스다.'},
+  'ケース':{meaning:'경우, 사례, 케이스',example:'これは珍しいケースだ。',translation:'이것은 드문 사례다.'},
+  'スター':{meaning:'스타, 인기인',example:'彼は映画スターになった。',translation:'그는 영화 스타가 되었다.'},
+  'スタンド':{meaning:'판매대, 관람석, 스탠드',example:'スタンドで飲み物を買った。',translation:'판매대에서 음료를 샀다.'},
+  'センター':{meaning:'중앙, 센터',example:'センターで案内を聞いた。',translation:'센터에서 안내를 물었다.'},
+  'ダイヤ':{meaning:'운행 시간표, 다이아몬드',example:'電車のダイヤが乱れている。',translation:'전철 운행 시간표가 엉클어져 있다.'},
+  'デモ':{meaning:'시위, 데모',example:'駅前でデモが行われた。',translation:'역 앞에서 시위가 열렸다.'},
+  'トップ':{meaning:'정상, 선두, 최고',example:'彼はクラスでトップだ。',translation:'그는 반에서 일등이다.'},
+  'バン':{meaning:'밴, 승합차',example:'荷物をバンに積んだ。',translation:'짐을 밴에 실었다.'},
+  'プラス':{meaning:'더하기, 이점',example:'経験は大きなプラスになる。',translation:'경험은 큰 이점이 된다.'},
+  'プロ':{meaning:'전문가, 프로',example:'彼はプロの選手だ。',translation:'그는 프로 선수다.'},
+  'ベルト':{meaning:'벨트, 허리띠',example:'革のベルトを買った。',translation:'가죽 벨트를 샀다.'},
+  'ボーイ':{meaning:'소년, 보이',example:'ホテルのボーイが荷物を運んだ。',translation:'호텔 보이가 짐을 옮겼다.'},
+  'ホーム':{meaning:'승강장, 집',example:'電車がホームに入ってきた。',translation:'전철이 승강장으로 들어왔다.'},
+  'マーケット':{meaning:'시장, 마켓',example:'母はマーケットへ買い物に行った。',translation:'어머니는 마켓으로 장을 보러 갔다.'}
+};
+WORDS.forEach(word=>{if(KATAKANA_CORRECTIONS[word.word])Object.assign(word,KATAKANA_CORRECTIONS[word.word])});
 
 const STORAGE_KEY='kimheekyo-n3-progress-v2';
 let state=loadState(); let quiz=[]; let quizIndex=0; let quizScore=0; let direction='jp-ko'; let quizMode='daily'; let quizRoundOffset=0;
