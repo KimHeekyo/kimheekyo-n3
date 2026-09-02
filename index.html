@@ -13,7 +13,7 @@
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icons/n3-icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-  <link rel="stylesheet" href="styles.css?v=12">
+  <link rel="stylesheet" href="styles.css?v=15">
 </head>
 <body class="home-active">
   <header class="site-header">
@@ -71,7 +71,7 @@
           <div id="progressTrack" class="progress-track"><span id="progressBar"></span></div>
           <article class="question-card">
             <p id="questionLabel" class="eyebrow">다음 단어의 뜻은?</p>
-            <h2 id="questionText"></h2><p id="questionReading" class="reading"></p>
+            <h2 id="questionText"></h2><div class="reading-slot"><button id="readingHint" class="reading-hint hidden" type="button">힌트보기</button><p id="questionReading" class="reading hidden"></p></div>
             <div id="options" class="options"></div>
             <div id="answerPanel" class="answer-panel hidden"><p id="answerResult"></p><p id="answerReading" class="answer-reading"></p><div class="example"><span>例文</span><p id="exampleJp"></p><small id="exampleKo"></small></div><button id="nextQuestion" class="primary">다음 문제 <span>→</span></button></div>
           </article>
@@ -93,6 +93,6 @@
   </aside>
   <footer><p>Made by 김희교</p></footer>
   <script src="data/words.js"></script>
-  <script src="app.js?v=14"></script>
+  <script src="app.js?v=15"></script>
 </body>
 </html>
