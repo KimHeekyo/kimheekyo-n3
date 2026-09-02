@@ -64,9 +64,14 @@ def main():
         if len(eligible) < 3:
             errors.append(f"#{index} ko-jp: fewer than three unambiguous distractors")
 
-    # Study modes must use the reviewed subset, never the imported review queue.
+    # Quiz/review modes must use the reviewed subset, while the searchable
+    # dictionary must retain the complete imported catalogue.
     if "const STUDY_WORDS=WORDS.filter" not in app_source:
         errors.append("app: reviewed study subset is not defined")
+    if "const WORD_LIST_WORDS=WORDS" not in app_source:
+        errors.append("app: complete dictionary catalogue is not defined")
+    if "const list=WORD_LIST_WORDS.filter" not in app_source:
+        errors.append("app: dictionary view does not use the complete catalogue")
     unsafe_uses = re.findall(r"(?:shuffle|filter)\(WORDS", app_source[app_source.find("const STORAGE_KEY") :])
     if unsafe_uses:
         errors.append("app: a study path still reads directly from unreviewed WORDS")
