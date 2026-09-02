@@ -10,6 +10,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "data" / "words.js"
+APP = ROOT / "app.js"
 REQUIRED = ("word", "kana", "meaning", "type", "example", "translation")
 KANA = re.compile(r"[ぁ-ゖァ-ヺー・\s]+")
 
@@ -26,6 +27,7 @@ def primary_meaning(word):
 def main():
     words = load_words()
     errors = []
+    app_source = APP.read_text(encoding="utf-8")
 
     for index, word in enumerate(words):
         for field in REQUIRED:
@@ -62,7 +64,28 @@ def main():
         if len(eligible) < 3:
             errors.append(f"#{index} ko-jp: fewer than three unambiguous distractors")
 
+    # Study modes must use the reviewed subset, never the imported review queue.
+    if "const STUDY_WORDS=WORDS.filter" not in app_source:
+        errors.append("app: reviewed study subset is not defined")
+    unsafe_uses = re.findall(r"(?:shuffle|filter)\(WORDS", app_source[app_source.find("const STORAGE_KEY") :])
+    if unsafe_uses:
+        errors.append("app: a study path still reads directly from unreviewed WORDS")
+
+    legacy_block = app_source[app_source.find("const LEGACY_WORDS_REVIEWED") : app_source.find("const VOCABULARY_CORRECTIONS")]
+    legacy_keys = set(re.findall(r"\{word:'([^']+)'", legacy_block))
+    correction_keys = set()
+    for start_name, end_name in (
+        ("VOCABULARY_CORRECTIONS", "VERB_MEANING_CORRECTIONS"),
+        ("KATAKANA_CORRECTIONS", "REVIEWED_WORD_KEYS"),
+    ):
+        start = app_source.find(f"const {start_name}")
+        end = app_source.find(f"const {end_name}", start)
+        correction_keys.update(re.findall(r"'([^']+)'\s*:", app_source[start:end]))
+    reviewed_count = len(legacy_keys | correction_keys)
+
     print(f"entries: {len(words)}")
+    print(f"reviewed study entries: {reviewed_count}")
+    print(f"quarantined review queue: {len(words) - reviewed_count}")
     print(f"unique words: {len(set(w['word'] for w in words))}")
     print(f"quiz cases checked: {len(words) * 2}")
     print(f"errors: {len(errors)}")

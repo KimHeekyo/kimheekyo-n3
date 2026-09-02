@@ -33,7 +33,7 @@
         <div class="section-heading"><div><h2>학습하기</h2></div></div>
         <div class="quick-grid">
           <button class="quick-card green" data-go="quiz" data-quiz-mode="daily"><span class="quick-icon">今</span><span><b>오늘의 퀴즈</b><small>10문제 풀기</small></span><i>→</i></button>
-          <button class="quick-card coral" data-go="words"><span class="quick-icon">あ</span><span><b>전체 단어 보기</b><small id="wordTotal">N3 핵심 단어</small></span><i>→</i></button>
+          <button class="quick-card coral" data-go="words"><span class="quick-icon">あ</span><span><b>검수 단어 보기</b><small id="wordTotal">검수 완료 단어</small></span><i>→</i></button>
           <button class="quick-card green" data-go="quiz" data-quiz-mode="random"><span class="quick-icon">問</span><span><b>랜덤 퀴즈</b><small>그만할 때까지 계속 풀기</small></span><i>→</i></button>
           <button class="quick-card yellow" data-go="review"><span class="quick-icon">復</span><span><b>오답 복습</b><small>틀린 단어 다시 보기</small></span><i>→</i></button>
         </div>
@@ -50,7 +50,7 @@
     </section>
 
     <section id="words" class="view page-view">
-      <div class="page-title"><p class="eyebrow">WORD COLLECTION</p><h1>나의 N3 단어장</h1><p>단어를 눌러 뜻과 예문을 확인하세요.</p></div>
+      <div class="page-title"><p class="eyebrow">REVIEWED WORDS</p><h1>검수된 N3 단어장</h1><p>뜻과 예문까지 검수된 단어만 표시합니다.</p></div>
       <div class="toolbar">
         <label class="search"><span>⌕</span><input id="wordSearch" type="search" placeholder="일본어, 읽기, 뜻으로 검색"></label>
         <select id="categoryFilter" aria-label="품사 필터"><option value="all">모든 품사</option><option value="명사">명사</option><option value="동사">동사</option><option value="형용사">형용사</option><option value="부사">부사</option><option value="접속사">접속사</option><option value="감탄사">감탄사</option><option value="조사">조사</option><option value="표현">표현</option></select>
@@ -93,6 +93,6 @@
   </aside>
   <footer><p>Made by 김희교</p></footer>
   <script src="data/words.js"></script>
-  <script src="app.js?v=16"></script>
+  <script src="app.js?v=17"></script>
 </body>
 </html>
