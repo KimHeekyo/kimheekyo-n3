@@ -8,6 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "data" / "words.js"
 REVIEW = ROOT / "data" / "manual-review.json"
+EXAMPLES = ROOT / "data" / "manual-examples.json"
 OUTPUT = ROOT / "data" / "reviewed-words.js"
 
 
@@ -19,8 +20,11 @@ def load_words():
 def main():
     words = load_words()
     review = json.loads(REVIEW.read_text(encoding="utf-8"))["entries"]
+    examples = json.loads(EXAMPLES.read_text(encoding="utf-8"))["entries"]
     if len(words) != len(review):
         raise SystemExit(f"review coverage mismatch: {len(review)} / {len(words)}")
+    if len(words) != len(examples):
+        raise SystemExit(f"example coverage mismatch: {len(examples)} / {len(words)}")
 
     built = []
     for source in words:
@@ -28,11 +32,16 @@ def main():
         checked = review.get(original)
         if not checked:
             raise SystemExit(f"missing review: {original}")
+        example = examples.get(original)
+        if not example:
+            raise SystemExit(f"missing example review: {original}")
         built.append({
             "word": checked.get("word", original),
             "kana": checked.get("kana", source["kana"]),
             "meaning": checked["meaning"],
             "type": checked["type"],
+            "example": example["example"],
+            "translation": example["translation"],
         })
 
     OUTPUT.write_text(

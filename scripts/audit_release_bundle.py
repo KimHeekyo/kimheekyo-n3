@@ -14,8 +14,10 @@ APP = ROOT / "app.js"
 HTML = ROOT / "index.html"
 SW = ROOT / "sw.js"
 KANA = re.compile(r"[ぁ-ゖァ-ヺー・\s]+")
-REQUIRED = ("word", "kana", "meaning", "type")
-RELEASE_VERSION = 21
+JAPANESE = re.compile(r"[ぁ-ゖァ-ヺ一-龯々]")
+KOREAN = re.compile(r"[가-힣]")
+REQUIRED = ("word", "kana", "meaning", "type", "example", "translation")
+RELEASE_VERSION = 22
 
 
 def load_bundle():
@@ -42,6 +44,10 @@ def main():
             errors.append(f"#{index} {word.get('word', '?')}: unexpected release fields")
         if ";" in word.get("meaning", "") or "；" in word.get("meaning", ""):
             errors.append(f"#{index} {word['word']}: semicolon in meaning")
+        if not JAPANESE.search(word.get("example", "")):
+            errors.append(f"#{index} {word['word']}: invalid example")
+        if not KOREAN.search(word.get("translation", "")):
+            errors.append(f"#{index} {word['word']}: invalid translation")
 
     pairs = Counter((word["word"], word["kana"]) for word in words)
     for (word, kana), count in pairs.items():
@@ -58,12 +64,12 @@ def main():
     ):
         if fragment not in app:
             errors.append(f"app missing: {fragment}")
-    for stale in ("#exampleJp", "#exampleKo", "exampleWithReading(w)"):
-        if stale in app:
-            errors.append(f"app still exposes unreviewed example: {stale}")
-    for stale in ('id="exampleJp"', 'id="exampleKo"', 'class="example"'):
-        if stale in html:
-            errors.append(f"html still exposes unreviewed example: {stale}")
+    for required in ("#exampleJp", "#exampleKo"):
+        if required not in app:
+            errors.append(f"app missing reviewed example output: {required}")
+    for required in ('id="exampleJp"', 'id="exampleKo"', 'class="example"'):
+        if required not in html:
+            errors.append(f"html missing reviewed example output: {required}")
     if 'id="previousQuestion"' not in html:
         errors.append("html missing previous-question control")
     versioned_bundle = f'data/reviewed-words.js?v={RELEASE_VERSION}'

@@ -13,7 +13,7 @@
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icons/n3-icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-  <link rel="stylesheet" href="styles.css?v=21">
+  <link rel="stylesheet" href="styles.css?v=22">
 </head>
 <body class="home-active">
   <header class="site-header">
@@ -73,7 +73,7 @@
             <p id="questionLabel" class="eyebrow">다음 단어의 뜻은?</p>
             <h2 id="questionText"></h2><div class="reading-slot"><button id="readingHint" class="reading-hint hidden" type="button">힌트보기</button><p id="questionReading" class="reading hidden"></p></div>
             <div id="options" class="options"></div>
-            <div id="answerPanel" class="answer-panel hidden"><p id="answerResult"></p><p id="answerReading" class="answer-reading"></p><button id="nextQuestion" class="primary">다음 문제 <span>→</span></button></div>
+            <div id="answerPanel" class="answer-panel hidden"><p id="answerResult"></p><p id="answerReading" class="answer-reading"></p><div class="example"><span>例文</span><p id="exampleJp"></p><small id="exampleKo"></small></div><button id="nextQuestion" class="primary">다음 문제 <span>→</span></button></div>
           </article>
         </div>
         <div id="quizResult" class="quiz-result hidden"><span class="result-mark">完</span><p class="eyebrow">QUIZ COMPLETE</p><h1>수고했어요!</h1><p id="resultCopy"></p><div class="result-actions"><button id="retryQuiz" class="primary">다시 풀기</button><button class="secondary" data-go="review">오답 복습</button></div></div>
@@ -92,7 +92,7 @@
     <button id="dismissUpdate" class="update-dismiss" type="button" aria-label="나중에 업데이트">×</button>
   </aside>
   <footer><p>Made by 김희교</p></footer>
-  <script src="data/reviewed-words.js?v=21"></script>
-  <script src="app.js?v=21"></script>
+  <script src="data/reviewed-words.js?v=22"></script>
+  <script src="app.js?v=22"></script>
 </body>
 </html>
