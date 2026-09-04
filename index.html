@@ -13,7 +13,7 @@
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icons/n3-icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-  <link rel="stylesheet" href="styles.css?v=19">
+  <link rel="stylesheet" href="styles.css?v=20">
 </head>
 <body class="home-active">
   <header class="site-header">
@@ -67,7 +67,7 @@
           <button id="startQuiz" class="primary">퀴즈 시작 <span>→</span></button>
         </div>
         <div id="quizGame" class="hidden">
-          <div class="quiz-top"><button id="quitQuiz" class="text-button">← 나가기</button><span id="quizProgress">1 / 10</span><span id="quizScore">정답 0</span></div>
+          <div class="quiz-top"><span class="quiz-top-actions"><button id="quitQuiz" class="text-button">← 나가기</button><button id="previousQuestion" class="text-button hidden">‹ 이전 문제</button></span><span id="quizProgress">1 / 10</span><span id="quizScore">정답 0</span></div>
           <div id="progressTrack" class="progress-track"><span id="progressBar"></span></div>
           <article class="question-card">
             <p id="questionLabel" class="eyebrow">다음 단어의 뜻은?</p>
@@ -92,7 +92,7 @@
     <button id="dismissUpdate" class="update-dismiss" type="button" aria-label="나중에 업데이트">×</button>
   </aside>
   <footer><p>Made by 김희교</p></footer>
-  <script src="data/reviewed-words.js?v=19"></script>
-  <script src="app.js?v=19"></script>
+  <script src="data/reviewed-words.js?v=20"></script>
+  <script src="app.js?v=20"></script>
 </body>
 </html>

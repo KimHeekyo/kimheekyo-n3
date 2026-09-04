@@ -15,6 +15,7 @@ HTML = ROOT / "index.html"
 SW = ROOT / "sw.js"
 KANA = re.compile(r"[ぁ-ゖァ-ヺー・\s]+")
 REQUIRED = ("word", "kana", "meaning", "type")
+RELEASE_VERSION = 20
 
 
 def load_bundle():
@@ -51,6 +52,9 @@ def main():
         "const STUDY_WORDS=REVIEWED_WORDS",
         "const WORD_LIST_WORDS=REVIEWED_WORDS",
         "class=\"card-reading-hint\"",
+        "let quizAnswers=[]",
+        "function showRecordedAnswer(record,w)",
+        "#previousQuestion",
     ):
         if fragment not in app:
             errors.append(f"app missing: {fragment}")
@@ -60,9 +64,12 @@ def main():
     for stale in ('id="exampleJp"', 'id="exampleKo"', 'class="example"'):
         if stale in html:
             errors.append(f"html still exposes unreviewed example: {stale}")
-    if 'data/reviewed-words.js?v=19' not in html or 'data/reviewed-words.js?v=19' not in sw:
+    if 'id="previousQuestion"' not in html:
+        errors.append("html missing previous-question control")
+    versioned_bundle = f'data/reviewed-words.js?v={RELEASE_VERSION}'
+    if versioned_bundle not in html or versioned_bundle not in sw:
         errors.append("reviewed bundle is not versioned in HTML and service worker")
-    if "kimheekyo-n3-v19" not in sw:
+    if f"kimheekyo-n3-v{RELEASE_VERSION}" not in sw:
         errors.append("service-worker cache version was not bumped")
 
     print(f"release entries: {len(words)}")
