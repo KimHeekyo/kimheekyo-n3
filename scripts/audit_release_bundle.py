@@ -15,7 +15,7 @@ HTML = ROOT / "index.html"
 SW = ROOT / "sw.js"
 KANA = re.compile(r"[ぁ-ゖァ-ヺー・\s]+")
 REQUIRED = ("word", "kana", "meaning", "type")
-RELEASE_VERSION = 20
+RELEASE_VERSION = 21
 
 
 def load_bundle():
